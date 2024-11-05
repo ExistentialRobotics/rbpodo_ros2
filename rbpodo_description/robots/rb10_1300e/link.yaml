@@ -1,3 +1,16 @@
+link0:
+  inertial:
+    origin:
+      xyz: 0.0 0.0 0.0
+      rpy: 0 0 0
+    mass: 0.1
+    inertia:
+      xx: 0.027403652
+      yy: 0.027770573
+      zz: 0.026140211
+      xy: -0.000005926
+      xz: -0.000010119
+      yz: 0.003030512
 link1:
   inertial:
     origin:

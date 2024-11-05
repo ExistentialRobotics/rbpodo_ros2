@@ -3,6 +3,10 @@
 
   <xacro:include filename="$(find rbpodo_description)/robots/rb_6dof.xacro" />
   <xacro:include filename="$(find rbpodo_description)/robots/rb_6dof.ros2_control.xacro" />
+  <xacro:include filename="$(find rbpodo_description)/robots/rb10_gazebo_control.xacro" />
+
+  <!-- <xacro:property name="ros2_control_params" value="$(find rbpodo_description)/configs/rb10_controller.yaml" />
+  <xacro:ignition_ros2_control_plugin ros2_control_params:="${ros2_control_params}"> -->
 
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="robot_ip" default="10.0.2.7"/>
