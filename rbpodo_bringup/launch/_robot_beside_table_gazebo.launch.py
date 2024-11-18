@@ -123,7 +123,8 @@ def get_per_robot_stack(robot_idx, load_controller):
         # the below becomes something like xarm0_xarm6_traj_controller. 
         # The first "xarm0" is from prefix. 
         # The second needs to match what's in xarm_control/config/*.yaml 
-        f'{this_robot_prefix}traj_controller',
+        # f'{this_robot_prefix}traj_controller',
+        # 'traj_controller',
     ]
     # TODO: fix gripper loading for controllers
 
@@ -245,8 +246,8 @@ def generate_launch_description():
     def _launch_all_robots(context):
         return sum(
             [
-                # get_per_robot_stack(robot_idx, bool(load_controller_config.perform(context)))
-                get_per_robot_stack(robot_idx, False)
+                get_per_robot_stack(robot_idx, bool(load_controller_config.perform(context)))
+                # get_per_robot_stack(robot_idx, False)
                 for robot_idx in range(int(num_robots_config.perform(context)))
             ],
             []

@@ -8,7 +8,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(xacro REQUIRED)
 
-install(DIRECTORY meshes robots launch rviz
+install(DIRECTORY meshes robots launch rviz configs
   DESTINATION share/${PROJECT_NAME}
 )
 

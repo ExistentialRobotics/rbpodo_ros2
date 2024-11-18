@@ -7,12 +7,12 @@ controller_manager:
     traj_controller:
       type: joint_trajectory_controller/JointTrajectoryController
     # Original comment: only for fake control (?)
-    gripper_traj_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+    # gripper_traj_controller:
+    #   type: joint_trajectory_controller/JointTrajectoryController
 
-    # Original comment: only for fake control (?)
-    bio_gripper_traj_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+    # # Original comment: only for fake control (?)
+    # bio_gripper_traj_controller:
+    #   type: joint_trajectory_controller/JointTrajectoryController
 
 traj_controller:
   ros__parameters:
