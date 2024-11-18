@@ -5,8 +5,7 @@
   <xacro:include filename="$(find rbpodo_description)/robots/rb_6dof.ros2_control.xacro" />
   <xacro:include filename="$(find rbpodo_description)/robots/rb10_gazebo_control.xacro" />
 
-  
-
+  <!-- RB10 Arguments -->
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="robot_ip" default="10.0.2.7"/>
   <xacro:arg name="cb_simulation" default="true"/>
