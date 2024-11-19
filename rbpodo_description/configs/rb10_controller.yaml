@@ -3,7 +3,6 @@ controller_manager:
     update_rate: 50  # Hz
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
-
     traj_controller:
       type: joint_trajectory_controller/JointTrajectoryController
     # Original comment: only for fake control (?)

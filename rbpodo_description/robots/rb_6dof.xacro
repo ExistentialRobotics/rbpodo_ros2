@@ -69,13 +69,14 @@
     <xacro:link name="${prefix}link6" />
     <link name="${prefix}${tcp_name}" />
 
-    <xacro:joint name="${prefix}base" prefix="${prefix}"/>
+    <!-- <xacro:joint name="${prefix}base" prefix="${prefix}"/>
     <xacro:joint name="${prefix}shoulder" prefix="${prefix}"/>
     <xacro:joint name="${prefix}elbow" prefix="${prefix}"/>
     <xacro:joint name="${prefix}wrist1" prefix="${prefix}"/>
     <xacro:joint name="${prefix}wrist2" prefix="${prefix}"/>
-    <xacro:joint name="${prefix}wrist3" prefix="${prefix}"/>
-    <!-- <xacro:property name="joints_props_file" value="$(find rbpodo_description)/robots/${model_id}/joint.yaml" />
+    <xacro:joint name="${prefix}wrist3" prefix="${prefix}"/> -->
+
+    <xacro:property name="joints_props_file" value="$(find rbpodo_description)/robots/${model_id}/joint.yaml" />
     <xacro:property name="joints_props" value="${xacro.load_yaml(joints_props_file)}" />
     
     <xacro:property name="props" value="${joints_props['base']}" />
@@ -148,7 +149,7 @@
 
       <xacro:property name="limit" value="${props.limit}" />
       <limit lower="${limit.lower}" upper="${limit.upper}" effort="${limit.effort}" velocity="${limit.velocity}" />
-    </joint> -->
+    </joint>
 
     <joint name="${prefix}${tcp_name}_joint" type="fixed">
       <origin xyz="${tcp_xyz}" rpy="${tcp_rpy}" />
