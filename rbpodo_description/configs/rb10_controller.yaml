@@ -5,6 +5,7 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
     traj_controller:
       type: joint_trajectory_controller/JointTrajectoryController
+      params_file: src/rbpodo_ros2/rbpodo_description/configs/rb10_controller.yaml
     # Original comment: only for fake control (?)
     # gripper_traj_controller:
     #   type: joint_trajectory_controller/JointTrajectoryController
