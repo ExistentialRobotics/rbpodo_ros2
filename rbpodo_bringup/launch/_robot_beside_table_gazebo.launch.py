@@ -39,6 +39,7 @@ def build_robot_description(this_robot_prefix="", this_robot_namespace="", add_g
                 "cb_simulation": "true",
                 "use_fake_hardware": "true",
                 "fake_sensor_commands": "false",
+                "attach_to": "rb10_1300e",
             }
         ),
     }
@@ -198,13 +199,26 @@ def generate_launch_description():
             [camera_namespace, '/camera_ired2@sensor_msgs/msg/Image@ignition.msgs.Image'],
             '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
             '/model/sensor_d455/pose@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
+            '/model/realsense2_camera/pose@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
+            '/model/rb10_1300e/pose@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
         ]
     )
+
+    relay_nodes = [
+        Node(
+            package="topic_tools",
+            executable="relay",
+            arguments=[
+                f"/model/{source}/pose",
+                "/tf"
+            ]
+        ) for source in ["realsense2_camera", "rb10_1300e"]
+    ]
 
     nodes_to_launch = [
         gazebo_launch,
         parameters_bridge,
-    ]
+    ] + relay_nodes
 
     # Node for launching camera robot state publisher
     robot_state_publisher_node_camera = Node(
