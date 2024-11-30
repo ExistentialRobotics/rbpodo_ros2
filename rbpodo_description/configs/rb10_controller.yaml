@@ -3,6 +3,7 @@ controller_manager:
     update_rate: 50  # Hz
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
+      params_file: src/rbpodo_ros2/rbpodo_description/configs/rb10_controller.yaml  
     traj_controller:
       type: joint_trajectory_controller/JointTrajectoryController
       params_file: src/rbpodo_ros2/rbpodo_description/configs/rb10_controller.yaml

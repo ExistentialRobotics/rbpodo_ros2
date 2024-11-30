@@ -93,6 +93,7 @@
 
       <xacro:property name="limit" value="${props.limit}" />
       <limit lower="${limit.lower}" upper="${limit.upper}" effort="${limit.effort}" velocity="${limit.velocity}" />
+      <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <xacro:property name="props" value="${joints_props['shoulder']}" />
@@ -105,6 +106,7 @@
 
       <xacro:property name="limit" value="${props.limit}" />
       <limit lower="${limit.lower}" upper="${limit.upper}" effort="${limit.effort}" velocity="${limit.velocity}" />
+      <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <xacro:property name="props" value="${joints_props['elbow']}" />
@@ -117,6 +119,7 @@
 
       <xacro:property name="limit" value="${props.limit}" />
       <limit lower="${limit.lower}" upper="${limit.upper}" effort="${limit.effort}" velocity="${limit.velocity}" />
+      <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <xacro:property name="props" value="${joints_props['wrist1']}" />
@@ -129,6 +132,7 @@
 
       <xacro:property name="limit" value="${props.limit}" />
       <limit lower="${limit.lower}" upper="${limit.upper}" effort="${limit.effort}" velocity="${limit.velocity}" />
+      <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <xacro:property name="props" value="${joints_props['wrist2']}" />
@@ -141,6 +145,7 @@
 
       <xacro:property name="limit" value="${props.limit}" />
       <limit lower="${limit.lower}" upper="${limit.upper}" effort="${limit.effort}" velocity="${limit.velocity}" />
+      <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <xacro:property name="props" value="${joints_props['wrist3']}" />
@@ -153,6 +158,7 @@
 
       <xacro:property name="limit" value="${props.limit}" />
       <limit lower="${limit.lower}" upper="${limit.upper}" effort="${limit.effort}" velocity="${limit.velocity}" />
+      <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <joint name="${prefix}${tcp_name}_joint" type="fixed">
