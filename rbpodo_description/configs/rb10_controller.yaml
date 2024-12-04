@@ -30,6 +30,49 @@ traj_controller:
       - wrist1
       - wrist2
       - wrist3
+    open_loop_control: false
+    gains:
+      base:
+        p: 100.
+        d: 1.
+        i: 0.
+        i_clamp: 0.
+        ff_scale: 0.
+      shoulder:
+        p: 100.
+        d: 1.
+        i: 0.
+        i_clamp: 0.
+        ff_scale: 0.
+      elbow:
+        p: 100.
+        d: 1.
+        i: 0.
+        i_clamp: 0.
+        ff_scale: 0.
+      wrist1:
+        p: 100.
+        d: 1.
+        i: 0.
+        i_clamp: 0.
+        ff_scale: 0.
+      wrist2:
+        p: 100.
+        d: 1.
+        i: 0.
+        i_clamp: 0.
+        ff_scale: 0.
+      wrist3:
+        p: 100.
+        d: 1.
+        i: 0.
+        i_clamp: 0.
+        ff_scale: 0.
+      # shoulder: {p: 100, d: 1}
+      # elbow: {p: 100, d: 1}
+      # wrist1: {p: 100, d: 1}
+      # wrist2: {p: 100, d: 1}
+      # wrist3: {p: 100, d: 1}
     constraints:
       goal_time: 0.5
       stopped_velocity_tolerance: 0.0
