@@ -8,13 +8,13 @@
     <link name="${name}">
       <visual>
         <geometry>
-          <mesh filename="$(find rbpodo_description)/meshes/${model_id}/visual/${name}.dae" />
+          <mesh filename="file://$(find rbpodo_description)/meshes/${model_id}/visual/${name}.dae" />
         </geometry>
       </visual>
 
       <collision>
         <geometry>
-          <mesh filename="$(find rbpodo_description)/meshes/${model_id}/collision/${name}.stl" />
+          <mesh filename="file://$(find rbpodo_description)/meshes/${model_id}/collision/${name}.stl" />
         </geometry>
       </collision>
 
