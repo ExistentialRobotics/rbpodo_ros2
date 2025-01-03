@@ -1,0 +1,14 @@
+controller_names:
+  - traj_controller
+
+traj_controller:
+  action_ns: follow_joint_trajectory
+  type: FollowJointTrajectory
+  default: true
+  joints:
+    - base
+    - shoulder
+    - elbow
+    - wrist1
+    - wrist2
+    - wrist3
