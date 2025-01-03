@@ -15,7 +15,7 @@ def generate_launch_description():
     moveit_controller_manager_value = LaunchConfiguration('moveit_controller_manager_value', default='moveit_simple_controller_manager/MoveItSimpleControllerManager') 
     no_gui_ctrl = LaunchConfiguration('no_gui_ctrl', default=False)
     prefix = LaunchConfiguration('prefix', default='')
-    robot_type= LaunchConfiguration('robot_type', default='xarm6')
+    robot_type= LaunchConfiguration('robot_type', default='rb10')
     ros2_control_plugin =  LaunchConfiguration('ros2_control_plugin', default='ign_ros2_control/IgnitionSystem') 
     use_sim_time = LaunchConfiguration('use_sim_time', default=True)
 

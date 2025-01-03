@@ -40,7 +40,7 @@ traj_controller:
         ff_scale: 0.
       shoulder:
         p: 100.
-        d: 1.
+        d: 10.
         i: 0.
         i_clamp: 0.
         ff_scale: 0.

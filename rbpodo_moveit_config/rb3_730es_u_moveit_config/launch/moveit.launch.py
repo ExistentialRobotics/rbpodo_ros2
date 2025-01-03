@@ -30,13 +30,14 @@ def launch_setup(context, *args, **kwargs):
     mappings = {
         "robot_ip": "10.0.2.7",
         "cb_simulation": "true",
-        "use_fake_hardware": "false",
+        "use_fake_hardware": "true",
         "fake_sensor_commands": "false",
+        "attach_to": "",
     }
 
     moveit_config = (
         MoveItConfigsBuilder("rb3_730es_u")
-        .robot_description(file_path="config/rb3_730es_u.urdf.xacro", mappings=mappings)
+        .robot_description(file_path="config/rb10_1300e.urdf.xacro", mappings=mappings)
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .planning_scene_monitor(
             publish_robot_description=True, publish_robot_description_semantic=True

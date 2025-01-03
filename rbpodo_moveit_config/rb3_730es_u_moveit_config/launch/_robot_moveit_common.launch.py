@@ -30,53 +30,56 @@ def launch_setup(context, *args, **kwargs):
     # robot_description_parameters
     # xarm_moveit_config/launch/lib/robot_moveit_config_lib.py
     mod = load_python_launch_file_as_module(os.path.join(get_package_share_directory(moveit_config_package_name), 'launch', 'lib', 'robot_moveit_config_lib.py'))
-    # get_xarm_robot_description_parameters = getattr(mod, 'get_xarm_robot_description_parameters')
-    # robot_description_parameters = get_xarm_robot_description_parameters(
-    #     xacro_urdf_file=PathJoinSubstitution([FindPackageShare('xarm_description'), 'urdf', 'xarm_device.urdf.xacro']),
-    #     xacro_srdf_file=PathJoinSubstitution([FindPackageShare('xarm_moveit_config'), 'srdf', 'xarm.srdf.xacro']),
-    #     urdf_arguments={
-    #         'prefix': prefix,
-    #         'hw_ns': hw_ns.perform(context).strip('/'),
-    #         'ros2_control_plugin': ros2_control_plugin,
-    #     },
-    #     srdf_arguments={
-    #         'prefix': 'xarm6_',
-    #         # 'dof': dof,
-    #         # 'robot_type': robot_type,
-    #         # 'add_gripper': add_gripper,
-    #         # 'add_vacuum_gripper': add_vacuum_gripper,
-    #         # 'add_bio_gripper': add_bio_gripper, # TODO: fix
-    #     },
-    #     arguments={
-    #         'context': context,
-    #         'xarm_type': robot_type.perform(context),
-    #     }
-    # )
+
     load_yaml = getattr(mod, 'load_yaml')
     # xacro_urdf_file=PathJoinSubstitution([FindPackageShare('rbpodo_description'), 'robots', 'rb10_1300e.urdf.xacro'])
     # xacro_srdf_file=PathJoinSubstitution([FindPackageShare(rb_pkg), 'config', 'rb10_1300e.srdf.xacro'])
-    robot_description_parameters = {
-        'robot_description_planning': load_yaml(rb_pkg, 'config', 'joint_limits.yaml'),
-        'robot_description_kinematics': load_yaml(rb_pkg, 'config', 'kinematics.yaml')
-    }
-    mappings = {
-        "robot_ip": "10.0.2.7",
-        "cb_simulation": "true",
-        "use_fake_hardware": "true",
-        "fake_sensor_commands": "false",
-    }
+    # robot_description_parameters = {
+    #     'robot_description_planning': load_yaml(rb_pkg, 'config', 'joint_limits.yaml'),
+    #     'robot_description_kinematics': load_yaml(rb_pkg, 'config', 'kinematics.yaml')
+    # }
+    # mappings = {
+    #     "robot_ip": "10.0.2.7",
+    #     "cb_simulation": "true",
+    #     "use_fake_hardware": "true",
+    #     "fake_sensor_commands": "false",
+    #     "attach_to": "rb10_1300e",
+    # }
 
-    moveit_config = (
-        MoveItConfigsBuilder("rb3_730es_u")
-        .robot_description(file_path="config/rb10_1300e.urdf.xacro", mappings=mappings)
-        .to_moveit_configs()
+    # moveit_config = (
+    #     MoveItConfigsBuilder("rb3_730es_u")
+    #     .robot_description(file_path="config/rb10_1300e.urdf.xacro", mappings=mappings)
+    #     .to_moveit_configs()
+    # )
+    get_xarm_robot_description_parameters = getattr(mod, 'get_xarm_robot_description_parameters')
+    robot_description_parameters = get_xarm_robot_description_parameters(
+        xacro_urdf_file=PathJoinSubstitution([FindPackageShare('rbpodo_description'), 'robots', 'rb10_1300e.urdf.xacro']),
+        # xacro_srdf_file=PathJoinSubstitution([FindPackageShare(rb_pkg), 'config', 'rb10_1300e.srdf.xacro']),
+        xacro_srdf_file=PathJoinSubstitution([FindPackageShare(rb_pkg), 'config', 'rb10_1300e.srdf.xacro']),
+        urdf_arguments={
+            'prefix': prefix,
+            'hw_ns': hw_ns.perform(context).strip('/'),
+            'ros2_control_plugin': ros2_control_plugin,
+        },
+        srdf_arguments={
+            'prefix': '',
+            # 'dof': dof,
+            # 'robot_type': robot_type,
+            # 'add_gripper': add_gripper,
+            # 'add_vacuum_gripper': add_vacuum_gripper,
+            # 'add_bio_gripper': add_bio_gripper, # TODO: fix
+        },
+        arguments={
+            'context': context,
+            'xarm_type': robot_type.perform(context),
+        }
     )
-
-    robot_desc = moveit_config.to_dict()
-    controllers_yaml = load_yaml(rb_pkg, 'config', 'moveit_controllers.yaml')
+    # robot_desc = moveit_config.to_dict()
+    controllers_yaml = load_yaml(rb_pkg, 'config', 'fake_controllers.yaml')
     ompl_planning_yaml = load_yaml(moveit_config_package_name, 'config', robot_type.perform(context), 'ompl_planning.yaml')
     kinematics_yaml = robot_description_parameters['robot_description_kinematics']
     joint_limits_yaml = robot_description_parameters.get('robot_description_planning', None)
+
 
     # if add_gripper.perform(context) in ('True', 'true'):
     #     gripper_controllers_yaml = load_yaml(moveit_config_package_name, 'config', '{}_gripper'.format(robot_type.perform(context)), '{}.yaml'.format(controllers_name.perform(context)))
@@ -178,34 +181,57 @@ def launch_setup(context, *args, **kwargs):
         # },
     }
 
-    # sensor_manager_parameters = {
-    #     'sensors': ['ros'],
-    #     'octomap_resolution': 0.02,
-    #     'ros.sensor_plugin': 'occupancy_map_monitor/PointCloudOctomapUpdater',
-    #     'ros.point_cloud_topic': '/camera/depth/color/points',
-    #     'ros.max_range': 2.0,
-    #     'ros.point_subsample': 1,
-    #     'ros.padding_offset': 0.1,
-    #     'ros.padding_scale': 1.0,
-    #     'ros.max_update_rate': 1.0,
-    #     'ros.filtered_cloud_topic': 'filtered_cloud',
-    # }
+    sensor_manager_parameters = {
+        'sensors': ['realsense_points'],
+        'realsense_points': {
+            'sensor_plugin': 'occupancy_map_monitor/PointCloudOctomapUpdater',
+            'point_cloud_topic': '/camera_01/camera_depth/points',
+            'max_range': 2.0,
+            'point_subsample': 1,
+            'padding_offset': 0.1,
+            'padding_scale': 1.0,
+            'max_update_rate': 1.0,
+            'filtered_cloud_topic': 'filtered_cloud',
+        }
+    }
 
     # Start the actual move_group node/action server
+    # move_group_node = Node(
+    #     package='moveit_ros_move_group',
+    #     executable='move_group',
+    #     output='screen',
+    #     parameters=[
+    #         robot_description_parameters,
+    #         ompl_planning_pipeline_config,
+    #         trajectory_execution,
+    #         plan_execution,
+    #         moveit_controllers,
+    #         planning_scene_monitor_parameters,
+    #         sensor_manager_parameters,
+    #         {'use_sim_time': use_sim_time},  # Simulation time flag
+    #         {'octomap_topic': '/octomap_full'},  # Octomap topic name
+    #         {'octomap_resolution': 0.05},  # Resolution of the Octomap
+    #         {'octomap_queue_size': 100},  # Queue size for the Octomap topic
+    #         {'publish_robot_description_semantic': True},
+    #     ],
+    # )
+
     move_group_node = Node(
         package='moveit_ros_move_group',
         executable='move_group',
         output='screen',
         parameters=[
-            robot_desc,
             robot_description_parameters,
             ompl_planning_pipeline_config,
             trajectory_execution,
             plan_execution,
             moveit_controllers,
             planning_scene_monitor_parameters,
-            # sensor_manager_parameters,
-            {'use_sim_time': use_sim_time},
+            sensor_manager_parameters,
+            {'use_sim_time': use_sim_time},  # Simulation time flag
+            {'octomap_topic': '/octomap_full'},  # Octomap topic name
+            {'octomap_resolution': 0.05},  # Resolution of the Octomap
+            {'octomap_queue_size': 100},  # Queue size for the Octomap topic
             {'publish_robot_description_semantic': True},
         ],
     )
