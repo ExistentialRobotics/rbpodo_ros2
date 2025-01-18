@@ -76,9 +76,11 @@ def launch_setup(context, *args, **kwargs):
     )
     # robot_desc = moveit_config.to_dict()
     controllers_yaml = load_yaml(rb_pkg, 'config', 'fake_controllers.yaml')
-    ompl_planning_yaml = load_yaml(moveit_config_package_name, 'config', robot_type.perform(context), 'ompl_planning.yaml')
-    kinematics_yaml = robot_description_parameters['robot_description_kinematics']
-    joint_limits_yaml = robot_description_parameters.get('robot_description_planning', None)
+    ompl_planning_yaml = load_yaml(rb_pkg, 'config', 'ompl_planning.yaml')
+    kinematics_yaml = load_yaml(rb_pkg, 'config', 'kinematics.yaml')
+    joint_limits_yaml = load_yaml(rb_pkg, 'config', 'joint_limits.yaml')
+    robot_description_parameters['robot_description_planning'] = joint_limits_yaml
+    robot_description_parameters['robot_description_kinematics'] = kinematics_yaml
 
 
     # if add_gripper.perform(context) in ('True', 'true'):
